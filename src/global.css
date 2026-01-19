@@ -1,0 +1,83 @@
+:root {
+    --border-color: black;
+    --background-color: rgb(243, 243, 243);
+    --shadow-color: rgba(0, 0, 0, 60%);
+    --button-border-color: black;
+    --button-background-color: var(--background-color);
+    --button-background-color-hover: rgb(238, 255, 0);
+    --button-primary-color: hsl(109, 100%, 40%);
+    --main-background-a: hsl(33, 100%, 55%);
+    --main-background-b: hsl(0, 82%, 35%);
+}
+
+.card {
+    background-color: var(--background-color);
+    padding: 12px;
+    margin: 12px;
+    box-shadow: var(--shadow-color) 8px 8px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+button {
+    background-color: var(--button-background-color);
+    border: 2px solid var(--button-border-color);
+}
+
+.button-primary {
+    border: 2px solid var(--button-primary-color);
+}
+
+button:hover {
+    background-color: var(--button-background-color-hover)
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.layout-bigleft {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.layout-onlyone {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.layout-bigright-4way {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-auto-rows: 1fr 1fr;
+}
+
+.layout-bigright {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.test-background {
+    margin: 20px 0px;
+}
+
+html {
+    background: repeating-conic-gradient(
+            var(--main-background-a) 0% 25%,
+            var(--main-background-b) 0% 50%
+    );
+    background-size: 50px 50px;
+}
