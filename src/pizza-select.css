@@ -1,0 +1,8 @@
+.pizza-card {
+    max-height: 125px;
+}
+
+.pizza-card > img {
+    display: block;
+    width: 100px;
+}
