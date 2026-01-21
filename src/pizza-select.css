@@ -4,5 +4,6 @@
 
 .pizza-card > img {
     display: block;
-    width: 100px;
+    max-width: 100px;
+    height: 100px;
 }

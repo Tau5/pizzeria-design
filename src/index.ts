@@ -1,3 +1,5 @@
+import {Row, Column} from "./base-components"
+
 class PizzaInfo {
     image: string = "";
     alergens: Array<string> = [];
@@ -60,13 +62,31 @@ function addOnePizza(pizza: PizzaInfo) {
 
 // Refrescar la lista de pizzas en el pedido
 function updatePedido() {
+    let pedidosNode = document.getElementById("pedidos")
+    if (pedidosNode != null) {
+        pedidosNode.innerHTML = ""
+
+        for (let [p, i] of pedido.pizzas) {
+            if (i < 1) continue
+            pedidosNode.appendChild(
+                ComposeOrderNode(p, () => {
+                    let maybe_pizza = pedido.pizzas.get(p)
+                    if (maybe_pizza != null) {
+                        pedido.pizzas.set(p, maybe_pizza - 1)
+                        updatePedido()
+                    }
+                })
+            )
+        }
+    }
+
 
 }
 
 function ComposePizzaNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement {
     let root = document.createElement("div");
 
-    root.classList = "inner-card column pizza-card row"
+    root.classList = "inner-card pizza-card row"
 
     let pizzaImage = document.createElement("img")
     pizzaImage.src = pizza.image.toString()
@@ -100,17 +120,15 @@ function ComposePizzaNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement
     root.appendChild(column)
 
     return root
-   return root
 }
 
 function ComposeOrderNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement {
 
    let root = document.createElement('div');
-   root.classList = 'inner-card card';
+   root.classList = 'inner-card pizza-card';
 
    let pizzaImage = document.createElement("img")
    pizzaImage.src = pizza.image.toString()
-
    root.appendChild(pizzaImage)
 
    let column = document.createElement("div")
@@ -118,29 +136,32 @@ function ComposeOrderNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement
 
    let name = document.createElement('h3');
    name.innerHTML = pizza.name;
-   column.appendChild(name);
 
    let count = document.createElement('input');
    count.type = 'number';
-   column.appendChild(count)
 
    let price = document.createElement('p');
    price.innerHTML = pizza.price.toString();
-   column.appendChild(price);
 
    let button = document.createElement('button');
    button.classList = 'button';
    button.innerHTML = 'Quitar 1';
    button.addEventListener('click', () => onClick());
-   column.appendChild(button);
 
    let totalPrice = document.createElement('p');
    totalPrice.innerHTML = (count.valueAsNumber * pizza.price).toString();
-   column.appendChild(totalPrice);
 
-   root.appendChild(column);
+   let inner =
+       Row([pizzaImage, Column(
+       [
+           name,
+           Row([button, count, price]),
+           totalPrice
+       ]
+   )])
 
-   return root
+    inner.classList.add("inner-card", "pizza-card")
+    return inner
 }
 
 function test_newNodoPizza() {
