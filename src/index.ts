@@ -1,4 +1,4 @@
-import {Row, Column} from "./base-components"
+import {Row, Column} from "./base-components.js"
 
 class PizzaInfo {
     image: string = "";
@@ -24,6 +24,8 @@ class Pedido {
 }
 
 let pedido = new Pedido(new Map())
+
+let vistaAcual = 0;
 
 let pizzas = [
     new PizzaInfo(
@@ -179,6 +181,44 @@ function test_newNodoPizza() {
             }
         )
     )
+}
+
+function vista(id: string): void {
+    let vis = document.getElementById(id);
+    vis?.classList.remove('hidden');
+}
+
+
+function nextView(): void {
+
+    let vistas: Array<string> = ['menu-pizza', 'menu-direccion', 'menu-trackeo', 'menu-pagar'];
+
+    vistas.forEach(idActual => {
+        let vista = document.getElementById(idActual);
+       vista?.classList.add('hidden');
+    });
+
+    switch (vistaAcual) {
+        case 0: {
+            vista(vistas[0]);
+            vistaAcual++;
+            break;
+        }
+        case 1: {
+                vista(vistas[1]);
+            vistaAcual++;
+            break;
+        }
+        case 2: {
+            vista(vistas[2]);
+            vistaAcual++;
+            break;
+        }
+        case 3: {
+            vista(vistas[3]);
+            break;
+        }
+    }
 }
 
 init()
