@@ -16,10 +16,21 @@ class PizzaInfo {
 class ItemPizza {
    pizza: PizzaInfo;
    cantidad: number;
+
+   constructor(pizza: PizzaInfo, cantidad: number) {
+      this.pizza = pizza;
+      this.cantidad = cantidad;
+   }
 }
 
 class Pedido {
    pizzas: Set<ItemPizza>
+
+   constructor(pizzas: Set<ItemPizza>) {
+      this.pizzas = pizzas;
+   }
+
+
 }
 
 pedido: Array<PizzaInfo> = []
