@@ -25,7 +25,7 @@ class Pedido {
 
 let pedido = new Pedido(new Map())
 
-let vistaAcual = 0;
+let vistaActual = 0;
 
 let pizzas = [
     new PizzaInfo(
@@ -71,12 +71,16 @@ function updatePedido() {
         for (let [p, i] of pedido.pizzas) {
             if (i < 1) continue
             pedidosNode.appendChild(
-                ComposeOrderNode(p, () => {
+                ComposeOrderNode(p, i, () => {
                     let maybe_pizza = pedido.pizzas.get(p)
                     if (maybe_pizza != null) {
                         pedido.pizzas.set(p, maybe_pizza - 1)
                         updatePedido()
                     }
+                },
+                (newValue) => {
+                    pedido.pizzas.set(p, newValue)
+                    updatePedido()
                 })
             )
         }
@@ -124,7 +128,10 @@ function ComposePizzaNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement
     return root
 }
 
-function ComposeOrderNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement {
+function ComposeOrderNode(pizza: PizzaInfo,
+                          amount: number,
+                          onClick: () => void,
+                          onValueChange: (value: number) => void): HTMLDivElement {
 
    let root = document.createElement('div');
    root.classList = 'inner-card pizza-card';
@@ -140,10 +147,19 @@ function ComposeOrderNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement
    name.innerHTML = pizza.name;
 
    let count = document.createElement('input');
+   count.value = amount.toString();
+
+   count.oninput = () => {
+       let maybeNewValue = parseInt(count.value);
+       if (!isNaN(maybeNewValue)) {
+           onValueChange(maybeNewValue);
+       }
+   }
+
    count.type = 'number';
 
    let price = document.createElement('p');
-   price.innerHTML = pizza.price.toString();
+   price.innerHTML = `x ${pizza.price} €`;
 
    let button = document.createElement('button');
    button.classList = 'button';
@@ -151,7 +167,7 @@ function ComposeOrderNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement
    button.addEventListener('click', () => onClick());
 
    let totalPrice = document.createElement('p');
-   totalPrice.innerHTML = (count.valueAsNumber * pizza.price).toString();
+   totalPrice.innerHTML = `${(count.valueAsNumber * pizza.price)}€`;
 
    let inner =
        Row([pizzaImage, Column(
@@ -183,14 +199,7 @@ function test_newNodoPizza() {
     )
 }
 
-function vista(id: string): void {
-    let vis = document.getElementById(id);
-    vis?.classList.remove('hidden');
-}
-
-
 function nextView(): void {
-
     let vistas: Array<string> = ['menu-pizza', 'menu-direccion', 'menu-trackeo', 'menu-pagar'];
 
     vistas.forEach(idActual => {
@@ -198,24 +207,20 @@ function nextView(): void {
        vista?.classList.add('hidden');
     });
 
-    switch (vistaAcual) {
+    vistaActual++;
+    document.getElementById(vistas[vistaActual])?.classList.remove("hidden")
+
+    switch (vistaActual) {
         case 0: {
-            vista(vistas[0]);
-            vistaAcual++;
             break;
         }
         case 1: {
-                vista(vistas[1]);
-            vistaAcual++;
             break;
         }
         case 2: {
-            vista(vistas[2]);
-            vistaAcual++;
             break;
         }
         case 3: {
-            vista(vistas[3]);
             break;
         }
     }
