@@ -1,5 +1,9 @@
 import {Row, Column} from "./base-components.js"
 
+const checkboxTarjeta = <HTMLInputElement>document.getElementById("checkTarjeta")
+const radioButtons = document.getElementsByClassName("check")
+const expandTarjeta = document.getElementById("cardExpanded")
+
 class PizzaInfo {
     image: string = "";
     alergens: Array<string> = [];
@@ -50,6 +54,22 @@ function init() {
         elegir_pizza_node?.appendChild(
             ComposePizzaNode(p, () => addOnePizza(p))
         )
+    }
+
+    for (let check of radioButtons) {
+        console.log(check.outerHTML)
+        check.addEventListener("input", (ev) => { onUpdateCheckTarjeta() })
+    }
+
+    onUpdateCheckTarjeta()
+}
+
+function onUpdateCheckTarjeta() {
+    console.log(checkboxTarjeta.checked)
+    if (checkboxTarjeta?.checked) {
+        expandTarjeta?.classList.remove("hidden")
+    } else {
+        expandTarjeta?.classList.add("hidden")
     }
 }
 

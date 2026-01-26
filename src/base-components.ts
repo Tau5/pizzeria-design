@@ -17,3 +17,10 @@ export function Row(inner: Array<HTMLElement>) {
     }
     return div
 }
+
+export function RowWithClasses(additionalClasses: string, inner: Array<HTMLElement>) {
+    let div = Row(inner);
+    div.className += " "
+    div.className += additionalClasses
+    return div
+}

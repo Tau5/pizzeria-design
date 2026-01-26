@@ -1,8 +1,9 @@
 :root {
     --border-color: black;
-    --background-color: rgb(243, 243, 243);
+    --background-color: rgb(211, 211, 211);
     --shadow-color: rgba(0, 0, 0, 60%);
     --button-border-color: black;
+    --credit-border-color: black;
     --button-background-color: var(--background-color);
     --button-background-color-hover: rgb(238, 255, 0);
     --button-primary-color: hsl(109, 100%, 40%);
@@ -20,7 +21,7 @@
 .inner-card {
     background-color: var(--background-color);
     padding: 12px;
-    margin: 12px;
+    margin: 4px;
     box-shadow: var(--shadow-color) 4px 4px;
     border: 2px solid var(--shadow-color);
 }
@@ -98,7 +99,30 @@ body, html {
     flex: 1;
     height: 99%;
 }
+body {
+    padding: 0px 100px;
+}
 
 .hidden {
     display: none;
+}
+
+input[type=number] {
+    width: 45px;
+}
+
+input[type=radio] {
+    border: 1px red solid;
+}
+
+.flex-left {
+
+}
+
+.centered {
+    align-items: center;
+}
+
+hr {
+    width: 100%;
 }
