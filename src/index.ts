@@ -43,6 +43,8 @@ let pizzas = [
 ]
 
 function init() {
+    nextView()
+
     let elegir_pizza_node = document.getElementById("menu-pizzas")
     for (let p of pizzas) {
         elegir_pizza_node?.appendChild(
@@ -199,16 +201,16 @@ function test_newNodoPizza() {
     )
 }
 
-function nextView(): void {
-    let vistas: Array<string> = ['menu-pizza', 'menu-direccion', 'menu-trackeo', 'menu-pagar'];
+export function nextView(): void {
+    let vistas: Array<string> = ['elegir-pizzas', 'menu-direccion', 'menu-pagar', 'menu-trackeo'];
 
     vistas.forEach(idActual => {
-        let vista = document.getElementById(idActual);
+       let vista = document.getElementById(idActual);
        vista?.classList.add('hidden');
     });
 
-    vistaActual++;
     document.getElementById(vistas[vistaActual])?.classList.remove("hidden")
+    vistaActual++;
 
     switch (vistaActual) {
         case 0: {

@@ -6,110 +6,118 @@
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="pizza-select.css">
     <script type="module" src="../dist/index.js" defer></script>
+    <script type="module">
+        import {nextView} from "../dist/index.js";
+
+        window.nextView = nextView
+    </script>
 </head>
 <body>
-    <div class="column expand">
-        <div class="card">
-            <h1>
-                Pizzería super mega hiper guay
-            </h1>
+<div class="column expand">
+    <div class="card">
+        <h1>
+            Pizzería super mega hiper guay
+        </h1>
+        <button onclick="nextView()">nextView()</button>
+    </div>
+    <div id="elegir-pizzas" class="layout-bigleft expand">
+        <div id="menu-pizzas" class="card">
+            <button onclick="test_newNodoPizza()">Añadir nodo pizza</button>
         </div>
-        <div id="elegir-pizzas" class="layout-bigleft expand">
-            <div id="menu-pizzas" class="card">
-                <button onclick="test_newNodoPizza()">Añadir nodo pizza</button>
-            </div>
-            <div id="pedidos" class="card">
+        <div id="pedidos" class="card">
 
-            </div>
         </div>
-        <div id="menu-direccion" class="layout-onlyone expand hidden" style="">
-            <div class="card">
-            <form>
-                <div id="calle">
-                    <label for="via">
-                        Via
-                    </label>
-                    <br>
-                    <input type="text" id="via" name="via">
-                </div>
-                <div id="portal/piso">
-                    <label for="piso">
-                        Piso
-                    </label>
-                    <br>
-                    <input type="text" id="piso" name="piso">
-                </div>
-                <div id="ciu">
-                    <label for="ciudad">
-                        Ciudad
-                    </label>
-                    <br>
-                    <input type="text" name="ciudad" id="ciudad">
-                </div>
-                <div id="postal">
-                    <label for="codigoPostal">
-                        Codigo postal
-                    </label>
-                    <br>
-                    <input type="number" name="codigoPostal" id="codigoPostal">
-                </div>
-            </form>
-            <div>
-                <button class="button-primary">
-                    Continuar
-                </button>
-            </div>
-            </div>
-        </div>
-        <div id="menu-trackeo" class="layout-bigright-4way expand">
-            <div class="card">
-              <p>
-
-              </p>
-            </div>
-            <div class="card">
-                <p>
-
-                </p>
-            </div>
-            <div class="card">
-                <p>
-
-                </p>
-                <button onclick="" class="button">
-                    Anular pedido
-                </button>
-            </div>
-            <div class="card">
-                <p>
-                </p>
-            </div>
-        </div>
-        <div id="menu-pagar" class="layout-bigright">
-            <div class="card">
-                <p>
-
-                </p>
-            </div>
-            <div class="card">
-                <div id="tarteja">
-                    <button>
-                        Tarjeta
-                    </button>
-                </div>
-                <div id="efectivo">
-                    <button class="button">
-                        Efectivo
-                    </button>
-                </div>
-                <div id="tpv">
-                    <button class="button">
-                        TPV
+    </div>
+    <div id="menu-direccion" class="layout-onlyone expand hidden" style="">
+        <div class="card row centered expand">
+            <div class="column centered expand">
+                <form>
+                    <div id="calle">
+                        <label for="via">
+                            Via
+                        </label>
+                        <br>
+                        <input type="text" id="via" name="via">
+                    </div>
+                    <div id="portal/piso">
+                        <label for="piso">
+                            Piso
+                        </label>
+                        <br>
+                        <input type="text" id="piso" name="piso">
+                    </div>
+                    <div id="ciu">
+                        <label for="ciudad">
+                            Ciudad
+                        </label>
+                        <br>
+                        <input type="text" name="ciudad" id="ciudad">
+                    </div>
+                    <div id="postal">
+                        <label for="codigoPostal">
+                            Codigo postal
+                        </label>
+                        <br>
+                        <input type="number" name="codigoPostal" id="codigoPostal">
+                    </div>
+                </form>
+                <div>
+                    <button class="button-primary">
+                        Continuar
                     </button>
                 </div>
             </div>
         </div>
     </div>
+    <div id="menu-trackeo" class="layout-bigright-4way expand">
+        <div class="card">
+            <p>
+
+            </p>
+        </div>
+        <div class="card">
+            <p>
+
+            </p>
+        </div>
+        <div class="card">
+            <p>
+
+            </p>
+            <button onclick="" class="button">
+                Anular pedido
+            </button>
+        </div>
+        <div class="card">
+            <p>
+            </p>
+        </div>
+    </div>
+    <div id="menu-pagar" class="layout-bigright">
+        <div class="card">
+            <p>
+
+            </p>
+        </div>
+        <div class="card">
+            <div id="tarteja">
+                <button>
+                    Tarjeta
+                </button>
+            </div>
+            <div id="efectivo">
+                <button class="button">
+                    Efectivo
+                </button>
+            </div>
+            <div id="tpv">
+                <button class="button">
+                    TPV
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
