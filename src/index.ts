@@ -266,6 +266,12 @@ function test_newNodoPizza() {
     )
 }
 
+function createNodesTracking() {
+    for (let n of ComposeDesglosePedido(pedido)) {
+        desglosePedido?.appendChild(n)
+    }
+}
+
 export function nextView(): void {
     let vistas: Array<string> = ['elegir-pizzas', 'menu-direccion', 'menu-pagar', 'menu-trackeo'];
 
