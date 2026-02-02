@@ -53,7 +53,7 @@ button:hover {
     background-color: var(--button-background-color-hover)
 }
 
-p {
+p, h3 {
     padding: 0;
     margin: 0;
 }
@@ -121,6 +121,24 @@ input[type=radio] {
 
 .centered {
     align-items: center;
+}
+
+.button-pay {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 10%);
+}
+
+.button-pay:hover {
+    background-color: rgba(255, 0, 0, 30%);
+}
+
+.button-pay:active {
+    background-color: rgba(255, 0, 0, 50%);
+}
+
+.button-l {
+    height: 35px;
+    font-size: 11pt;
 }
 
 hr {
