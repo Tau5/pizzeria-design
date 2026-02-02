@@ -7,6 +7,7 @@ const via = (<HTMLInputElement>document.getElementById('via'));
 const piso = (<HTMLInputElement>document.getElementById('piso'));
 const ciudad = (<HTMLInputElement>document.getElementById('ciudad'));
 const codPostal = (<HTMLInputElement>document.getElementById('codigoPostal'));
+const desglosePedido = document.getElementById("desglosePedido")
 
 class PizzaInfo {
     image: string = "";
@@ -29,6 +30,16 @@ class Pedido {
     constructor(pizzas: Map<PizzaInfo, number>) {
         this.pizzas = pizzas;
     }
+
+    getTotal(): number {
+        let total = 0
+
+        for (let [pizza, amount] of this.pizzas) {
+           total += pizza.price * amount
+        }
+
+        return total
+    }
 }
 
 let pedido = new Pedido(new Map())
@@ -49,6 +60,39 @@ let pizzas = [
         "Pizza margarita"
     )
 ]
+
+function ComposeDesglosePedido(pedido: Pedido) {
+    let nodes: Array<HTMLElement> = []
+    for (let [pizza, amount] of pedido.pizzas.entries()) {
+        let label = document.createElement("p")
+        label.innerText = pizza.name
+
+        let amountLabel = document.createElement("p")
+        amountLabel.innerText = `x ${amount}`
+
+        let total = document.createElement("p")
+        total.innerText = `${amount * pizza.price}€`
+        total.classList.add("flex-item-right")
+
+        nodes.push(
+            Row([label, amountLabel, total])
+        )
+    }
+
+    let labelTotal = document.createElement("p")
+    labelTotal.innerText = "Total"
+
+
+    let labelTotalAmount = document.createElement("p")
+    labelTotalAmount.innerText = `${pedido.getTotal()}€`
+    labelTotalAmount.classList.add("flex-item-right")
+
+    nodes.push(
+        Row([labelTotal, labelTotalAmount])
+    )
+
+    return nodes
+}
 
 function init() {
     nextView()
@@ -194,6 +238,7 @@ function ComposeOrderNode(pizza: PizzaInfo,
 
    let totalPrice = document.createElement('p');
    totalPrice.innerHTML = `${(count.valueAsNumber * pizza.price)}€`;
+   totalPrice.classList.add("flex-item-right")
 
    let inner =
        Row([pizzaImage, Column(
@@ -225,6 +270,12 @@ function test_newNodoPizza() {
     )
 }
 
+function createNodesTracking() {
+    for (let n of ComposeDesglosePedido(pedido)) {
+        desglosePedido?.appendChild(n)
+    }
+}
+
 export function nextView(): void {
     let vistas: Array<string> = ['elegir-pizzas', 'menu-direccion', 'menu-pagar', 'menu-trackeo'];
 
@@ -249,6 +300,7 @@ export function nextView(): void {
         }
         case 3: {
             impresAddressData()
+            createNodesTracking()
             break;
         }
     }
