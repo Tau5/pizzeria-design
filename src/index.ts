@@ -3,6 +3,10 @@ import {Row, Column} from "./base-components.js"
 const checkboxTarjeta = <HTMLInputElement>document.getElementById("checkTarjeta")
 const radioButtons = document.getElementsByClassName("check")
 const expandTarjeta = document.getElementById("cardExpanded")
+let via;
+let piso;
+let ciudad;
+let codPostal;
 
 class PizzaInfo {
     image: string = "";
@@ -237,15 +241,24 @@ export function nextView(): void {
             break;
         }
         case 1: {
+            getAddressData();
             break;
         }
         case 2: {
+
             break;
         }
         case 3: {
             break;
         }
     }
+}
+
+function getAddressData() {
+    via = (<HTMLInputElement>document.getElementById('via'))?.value;
+    piso = (<HTMLInputElement>document.getElementById('piso'))?.value;
+    ciudad = (<HTMLInputElement>document.getElementById('ciudad'))?.value;
+    codPostal = (<HTMLInputElement>document.getElementById('codigoPostal'))?.value;
 }
 
 init()
