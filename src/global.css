@@ -123,6 +123,24 @@ input[type=radio] {
     align-items: center;
 }
 
+.button-pay {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 10%);
+}
+
+.button-pay:hover {
+    background-color: rgba(255, 0, 0, 30%);
+}
+
+.button-pay:active {
+    background-color: rgba(255, 0, 0, 50%);
+}
+
+.button-l {
+    height: 35px;
+    font-size: 11pt;
+}
+
 hr {
     width: 100%;
 }
