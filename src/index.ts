@@ -3,6 +3,10 @@ import {Row, Column} from "./base-components.js"
 const checkboxTarjeta = <HTMLInputElement>document.getElementById("checkTarjeta")
 const radioButtons = document.getElementsByClassName("check")
 const expandTarjeta = document.getElementById("cardExpanded")
+const via = (<HTMLInputElement>document.getElementById('via'));
+const piso = (<HTMLInputElement>document.getElementById('piso'));
+const ciudad = (<HTMLInputElement>document.getElementById('ciudad'));
+const codPostal = (<HTMLInputElement>document.getElementById('codigoPostal'));
 const desglosePedido = document.getElementById("desglosePedido")
 
 class PizzaInfo {
@@ -291,13 +295,34 @@ export function nextView(): void {
             break;
         }
         case 2: {
+
             break;
         }
         case 3: {
+            impresAddressData()
             createNodesTracking()
             break;
         }
     }
+}
+
+function impresAddressData() {
+    let container = document.getElementById('addressInformation');
+
+    let pVia = document.createElement('p');
+    pVia.innerHTML = via.value;
+    let pPiso = document.createElement('p');
+    pPiso.innerHTML = piso.value;
+    let pCiudad = document.createElement('p');
+    pCiudad.innerHTML = ciudad.value;
+    let codiPostal = document.createElement('p');
+    codiPostal.innerHTML = codPostal.value;
+
+    container?.appendChild(pVia);
+    container?.appendChild(pPiso);
+    container?.appendChild(pCiudad);
+    container?.appendChild(codiPostal);
+
 }
 
 init()

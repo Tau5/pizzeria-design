@@ -18,14 +18,15 @@
         <h1>
             Pizzería super mega hiper guay
         </h1>
-        <button onclick="nextView()">nextView()</button>
     </div>
     <div id="elegir-pizzas" class="layout-bigleft expand">
         <div id="menu-pizzas" class="card column">
             <button onclick="test_newNodoPizza()">Añadir nodo pizza</button>
         </div>
         <div id="pedidos" class="card column">
-
+            <button class="button-primary" onclick="nextView()">
+                Continuar
+            </button>
         </div>
     </div>
     <div id="menu-direccion" class="layout-onlyone expand hidden" style="">
@@ -61,11 +62,9 @@
                         <input type="number" name="codigoPostal" id="codigoPostal">
                     </div>
                 </form>
-                <div>
-                    <button class="button-primary">
-                        Continuar
-                    </button>
-                </div>
+                <button class="button-primary" onclick="nextView()">
+                    Continuar
+                </button>
             </div>
         </div>
     </div>
@@ -89,10 +88,11 @@
             <button onclick="" class="button button-l button-pay">
                 Anular pedido
             </button>
+            <button class="button-primary" onclick="nextView()">
+                Finalizar
+            </button>
         </div>
-        <div class="card">
-            <p>
-            </p>
+        <div class="card" id="addressInformation">
         </div>
     </div>
     <div id="menu-pagar" class="layout-bigright">
@@ -107,16 +107,16 @@
                     <form class="column">
                         <label>
                             Nº
-                            <input type="text" id="via" name="via">
+                            <input type="text" id="numTarjetah" name="via">
                         </label>
                         <label>
                             Nombre completo
                             <br>
-                            <input type="text" id="via" name="via">
+                            <input type="text" id="nombre" name="via">
                         </label>
                         <label>
                             VCC
-                            <input type="text" id="via" name="via">
+                            <input type="text" id="cvv" name="via">
                         </label>
                     </form>
                 </div>
@@ -130,6 +130,9 @@
                 <input class="check" type="radio" name="metodo" value="tpv" />
                 TPV
             </label>
+            <button class="button-primary" onclick="nextView()">
+                Continuar
+            </button>
         </div>
         </div>
     </div>
