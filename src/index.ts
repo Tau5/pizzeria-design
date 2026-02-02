@@ -134,7 +134,7 @@ function addOnePizza(pizza: PizzaInfo) {
 
 // Refrescar la lista de pizzas en el pedido
 function updatePedido() {
-    let pedidosNode = document.getElementById("pedidos")
+    let pedidosNode = document.getElementById("pizzas-pedidas")
     if (pedidosNode != null) {
         pedidosNode.innerHTML = ""
 
