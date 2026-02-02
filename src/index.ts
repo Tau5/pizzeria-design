@@ -3,6 +3,7 @@ import {Row, Column} from "./base-components.js"
 const checkboxTarjeta = <HTMLInputElement>document.getElementById("checkTarjeta")
 const radioButtons = document.getElementsByClassName("check")
 const expandTarjeta = document.getElementById("cardExpanded")
+const desglosePedido = document.getElementById("desglosePedido")
 
 class PizzaInfo {
     image: string = "";
@@ -25,6 +26,16 @@ class Pedido {
     constructor(pizzas: Map<PizzaInfo, number>) {
         this.pizzas = pizzas;
     }
+
+    getTotal(): number {
+        let total = 0
+
+        for (let [pizza, amount] of this.pizzas) {
+           total += pizza.price * amount
+        }
+
+        return total
+    }
 }
 
 let pedido = new Pedido(new Map())
@@ -45,6 +56,39 @@ let pizzas = [
         "Pizza margarita"
     )
 ]
+
+function ComposeDesglosePedido(pedido: Pedido) {
+    let nodes: Array<HTMLElement> = []
+    for (let [pizza, amount] of pedido.pizzas.entries()) {
+        let label = document.createElement("p")
+        label.innerText = pizza.name
+
+        let amountLabel = document.createElement("p")
+        amountLabel.innerText = `x ${amount}`
+
+        let total = document.createElement("p")
+        total.innerText = `${amount * pizza.price}€`
+        total.classList.add("flex-item-right")
+
+        nodes.push(
+            Row([label, amountLabel, total])
+        )
+    }
+
+    let labelTotal = document.createElement("p")
+    labelTotal.innerText = "Total"
+
+
+    let labelTotalAmount = document.createElement("p")
+    labelTotalAmount.innerText = `${pedido.getTotal()}€`
+    labelTotalAmount.classList.add("flex-item-right")
+
+    nodes.push(
+        Row([labelTotal, labelTotalAmount])
+    )
+
+    return nodes
+}
 
 function init() {
     nextView()
@@ -182,6 +226,7 @@ function ComposeOrderNode(pizza: PizzaInfo,
 
    let price = document.createElement('p');
    price.innerHTML = `x ${pizza.price} €`;
+   price.classList.add("flex-item-right")
 
    let button = document.createElement('button');
    button.classList = 'button';
@@ -243,6 +288,7 @@ export function nextView(): void {
             break;
         }
         case 3: {
+            createNodesTracking()
             break;
         }
     }

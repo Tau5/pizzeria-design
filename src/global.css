@@ -115,8 +115,8 @@ input[type=radio] {
     border: 1px red solid;
 }
 
-.flex-left {
-
+.flex-item-right {
+    margin-left: auto;
 }
 
 .centered {
