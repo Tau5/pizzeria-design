@@ -7,6 +7,9 @@
     --button-background-color: var(--background-color);
     --button-background-color-hover: rgb(238, 255, 0);
     --button-primary-color: hsl(109, 100%, 40%);
+    --button-primary-color-background: hsla(109, 100%, 40%, 10%);
+    --button-primary-color-hover: hsla(109, 100%, 40%, 25%);
+    --button-primary-color-active: hsla(109, 100%, 40%, 50%);
     --main-background-a: hsl(33, 100%, 55%);
     --main-background-b: hsl(0, 82%, 35%);
 }
@@ -30,14 +33,12 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-    flex-grow: 1;
 }
 
 .row {
     display: flex;
     flex-direction: row;
     gap: 6px;
-    flex-grow: 1;
 }
 
 button {
@@ -47,6 +48,15 @@ button {
 
 .button-primary {
     border: 2px solid var(--button-primary-color);
+    background-color: var(--button-background-color);
+}
+
+.button-primary:hover {
+    background-color: var(--button-primary-color-hover);
+}
+
+.button-primary:active {
+    background-color: var(--button-primary-color-active);
 }
 
 button:hover {

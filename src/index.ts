@@ -226,7 +226,6 @@ function ComposeOrderNode(pizza: PizzaInfo,
 
    let price = document.createElement('p');
    price.innerHTML = `x ${pizza.price} €`;
-   price.classList.add("flex-item-right")
 
    let button = document.createElement('button');
    button.classList = 'button';
@@ -235,6 +234,7 @@ function ComposeOrderNode(pizza: PizzaInfo,
 
    let totalPrice = document.createElement('p');
    totalPrice.innerHTML = `${(count.valueAsNumber * pizza.price)}€`;
+   totalPrice.classList.add("flex-item-right")
 
    let inner =
        Row([pizzaImage, Column(
