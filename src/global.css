@@ -107,8 +107,9 @@ html {
 body, html {
     display: flex;
     flex: 1;
-    height: 99%;
+    max-height: 99%;
 }
+
 body {
     padding: 0px 100px;
 }
@@ -127,6 +128,10 @@ input[type=radio] {
 
 .flex-item-right {
     margin-left: auto;
+}
+
+.flex-item-down {
+
 }
 
 .centered {
@@ -153,4 +158,8 @@ input[type=radio] {
 
 hr {
     width: 100%;
+}
+
+#pizzas-pedidas {
+    overflow: scroll;
 }
