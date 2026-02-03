@@ -1,4 +1,4 @@
-import {Row, Column} from "./base-components.js"
+import {Row, Column, RowWithClasses, ColumnWithClasses} from "./base-components.js"
 
 const checkboxTarjeta = <HTMLInputElement>document.getElementById("checkTarjeta")
 const radioButtons = document.getElementsByClassName("check")
@@ -80,16 +80,16 @@ function ComposeDesglosePedido(pedido: Pedido) {
         )
     }
 
-    let labelTotal = document.createElement("p")
+    let labelTotal = document.createElement("h3")
     labelTotal.innerText = "Total"
 
 
-    let labelTotalAmount = document.createElement("p")
+    let labelTotalAmount = document.createElement("h3")
     labelTotalAmount.innerText = `${pedido.getTotal()}€`
     labelTotalAmount.classList.add("flex-item-right")
 
     nodes.push(
-        Row([labelTotal, labelTotalAmount])
+        RowWithClasses("flex-item-down", [labelTotal, labelTotalAmount])
     )
 
     return nodes
@@ -232,7 +232,8 @@ function ComposeOrderNode(pizza: PizzaInfo,
    count.type = 'number';
 
    let price = document.createElement('p');
-   price.innerHTML = `x ${pizza.price} €`;
+   price.innerHTML = `x ${pizza.price}€`;
+   price.classList.add("flex-item-right")
 
    let button = document.createElement('button');
    button.classList = 'button';
@@ -244,13 +245,13 @@ function ComposeOrderNode(pizza: PizzaInfo,
    totalPrice.classList.add("flex-item-right")
 
    let inner =
-       Row([pizzaImage, Column(
+       Row([pizzaImage, ColumnWithClasses("expand",
        [
            name,
-           Row([button, count, price]),
+           Row([button, RowWithClasses("flex-item-right", [count, price])]),
            totalPrice
-       ]
-   )])
+       ])
+   ])
 
     inner.classList.add("inner-card", "pizza-card")
     return inner

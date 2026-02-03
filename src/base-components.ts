@@ -24,3 +24,11 @@ export function RowWithClasses(additionalClasses: string, inner: Array<HTMLEleme
     div.className += additionalClasses
     return div
 }
+
+
+export function ColumnWithClasses(additionalClasses: string, inner: Array<HTMLElement>) {
+    let div = Column(inner);
+    div.className += " "
+    div.className += additionalClasses
+    return div
+}

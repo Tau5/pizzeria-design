@@ -48,7 +48,7 @@ button {
 
 .button-primary {
     border: 2px solid var(--button-primary-color);
-    background-color: var(--button-background-color);
+    background-color: var(--button-primary-color-background);
 }
 
 .button-primary:hover {
@@ -102,6 +102,7 @@ html {
             var(--main-background-b) 0% 50%
     );
     background-size: 50px 50px;
+    height: 100%;
 }
 
 body, html {
