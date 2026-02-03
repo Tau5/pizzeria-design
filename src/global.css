@@ -131,7 +131,7 @@ input[type=radio] {
 }
 
 .flex-item-down {
-
+    margin-top: auto;
 }
 
 .centered {
