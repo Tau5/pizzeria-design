@@ -8,6 +8,7 @@ const piso = (<HTMLInputElement>document.getElementById('piso'));
 const ciudad = (<HTMLInputElement>document.getElementById('ciudad'));
 const codPostal = (<HTMLInputElement>document.getElementById('codigoPostal'));
 const desglosePedido = document.getElementById("desglosePedido")
+const pedidosTotalPrice = document.getElementById("pedidos-total-price")
 
 class PizzaInfo {
     image: string = "";
@@ -134,7 +135,7 @@ function addOnePizza(pizza: PizzaInfo) {
 
 // Refrescar la lista de pizzas en el pedido
 function updatePedido() {
-    let pedidosNode = document.getElementById("pedidos")
+    let pedidosNode = document.getElementById("pizzas-pedidas")
     if (pedidosNode != null) {
         pedidosNode.innerHTML = ""
 
@@ -156,7 +157,9 @@ function updatePedido() {
         }
     }
 
-
+    if (pedidosTotalPrice != null) {
+        pedidosTotalPrice.innerText = `${pedido.getTotal()}€`
+    }
 }
 
 function ComposePizzaNode(pizza: PizzaInfo, onClick: () => void): HTMLDivElement {
