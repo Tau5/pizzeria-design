@@ -173,3 +173,11 @@ hr {
 .step-disabled {
     opacity: 50%;
 }
+
+.tracking-step > img {
+    border: ridge 6px grey;
+}
+
+.tracking-step > p {
+    text-align: center;
+}
