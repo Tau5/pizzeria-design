@@ -10,6 +10,11 @@ const codPostal = (<HTMLInputElement>document.getElementById('codigoPostal'));
 const desglosePedido = document.getElementById("desglosePedido")
 const pedidosTotalPrice = document.getElementById("pedidos-total-price")
 
+const trackingStep2Line = document.getElementById("track-s2-line")
+const trackingStep2Main = document.getElementById("track-s2-main")
+const trackingStep3Line = document.getElementById("track-s3-line")
+const trackingStep3Main = document.getElementById("track-s3-main")
+
 class PizzaInfo {
     image: string = "";
     alergens: Array<string> = [];
