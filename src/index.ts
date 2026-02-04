@@ -285,6 +285,26 @@ function createNodesTracking() {
     }
 }
 
+function initializeAnimationsTracking() {
+    setTimeout(() => {
+        if (trackingStep2Line != null) {
+            trackingStep2Line.classList.remove("step-disabled")
+        }
+        if (trackingStep2Main != null) {
+            trackingStep2Main.classList.remove("step-disabled")
+        }
+    }, 5000)
+
+    setTimeout(() => {
+        if (trackingStep3Line != null) {
+            trackingStep3Line.classList.remove("step-disabled")
+        }
+        if (trackingStep3Main != null) {
+            trackingStep3Main.classList.remove("step-disabled")
+        }
+    }, 10_000)
+}
+
 export function nextView(): void {
     let vistas: Array<string> = ['elegir-pizzas', 'menu-direccion', 'menu-pagar', 'menu-trackeo'];
 
@@ -310,6 +330,7 @@ export function nextView(): void {
         case 3: {
             impresAddressData()
             createNodesTracking()
+            initializeAnimationsTracking()
             break;
         }
     }
