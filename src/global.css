@@ -164,3 +164,20 @@ hr {
 #pizzas-pedidas {
     overflow: scroll;
 }
+
+.line-step {
+    width: 50px;
+    border: 1px solid black;
+}
+
+.step-disabled {
+    opacity: 50%;
+}
+
+.tracking-step > img {
+    border: ridge 6px grey;
+}
+
+.tracking-step > p {
+    text-align: center;
+}
