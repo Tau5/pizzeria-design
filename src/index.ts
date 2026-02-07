@@ -41,7 +41,7 @@ class Pedido {
         let total = 0
 
         for (let [pizza, amount] of this.pizzas) {
-           total += pizza.price * amount
+            total += pizza.price * amount
         }
 
         return total
@@ -138,7 +138,6 @@ function addOnePizza(pizza: PizzaInfo) {
     updatePedido()
 }
 
-// Refrescar la lista de pizzas en el pedido
 function updatePedido() {
     let pedidosNode = document.getElementById("pizzas-pedidas")
     if (pedidosNode != null) {
@@ -148,16 +147,16 @@ function updatePedido() {
             if (i < 1) continue
             pedidosNode.appendChild(
                 ComposeOrderNode(p, i, () => {
-                    let maybe_pizza = pedido.pizzas.get(p)
-                    if (maybe_pizza != null) {
-                        pedido.pizzas.set(p, maybe_pizza - 1)
+                        let maybe_pizza = pedido.pizzas.get(p)
+                        if (maybe_pizza != null) {
+                            pedido.pizzas.set(p, maybe_pizza - 1)
+                            updatePedido()
+                        }
+                    },
+                    (newValue) => {
+                        pedido.pizzas.set(p, newValue)
                         updatePedido()
-                    }
-                },
-                (newValue) => {
-                    pedido.pizzas.set(p, newValue)
-                    updatePedido()
-                })
+                    })
             )
         }
     }
@@ -211,52 +210,52 @@ function ComposeOrderNode(pizza: PizzaInfo,
                           onClick: () => void,
                           onValueChange: (value: number) => void): HTMLDivElement {
 
-   let root = document.createElement('div');
-   root.classList = 'inner-card pizza-card';
+    let root = document.createElement('div');
+    root.classList = 'inner-card pizza-card';
 
-   let pizzaImage = document.createElement("img")
-   pizzaImage.src = pizza.image.toString()
-   root.appendChild(pizzaImage)
+    let pizzaImage = document.createElement("img")
+    pizzaImage.src = pizza.image.toString()
+    root.appendChild(pizzaImage)
 
-   let column = document.createElement("div")
-   column.classList = "column"
+    let column = document.createElement("div")
+    column.classList = "column"
 
-   let name = document.createElement('h3');
-   name.innerHTML = pizza.name;
+    let name = document.createElement('h3');
+    name.innerHTML = pizza.name;
 
-   let count = document.createElement('input');
-   count.value = amount.toString();
+    let count = document.createElement('input');
+    count.value = amount.toString();
 
-   count.oninput = () => {
-       let maybeNewValue = parseInt(count.value);
-       if (!isNaN(maybeNewValue)) {
-           onValueChange(maybeNewValue);
-       }
-   }
+    count.oninput = () => {
+        let maybeNewValue = parseInt(count.value);
+        if (!isNaN(maybeNewValue)) {
+            onValueChange(maybeNewValue);
+        }
+    }
 
-   count.type = 'number';
+    count.type = 'number';
 
-   let price = document.createElement('p');
-   price.innerHTML = `x ${pizza.price}€`;
-   price.classList.add("flex-item-right")
+    let price = document.createElement('p');
+    price.innerHTML = `x ${pizza.price}€`;
+    price.classList.add("flex-item-right")
 
-   let button = document.createElement('button');
-   button.classList = 'button';
-   button.innerHTML = 'Quitar 1';
-   button.addEventListener('click', () => onClick());
+    let button = document.createElement('button');
+    button.classList = 'button';
+    button.innerHTML = 'Quitar 1';
+    button.addEventListener('click', () => onClick());
 
-   let totalPrice = document.createElement('p');
-   totalPrice.innerHTML = `${(count.valueAsNumber * pizza.price)}€`;
-   totalPrice.classList.add("flex-item-right")
+    let totalPrice = document.createElement('p');
+    totalPrice.innerHTML = `${(count.valueAsNumber * pizza.price)}€`;
+    totalPrice.classList.add("flex-item-right")
 
-   let inner =
-       Row([pizzaImage, ColumnWithClasses("expand",
-       [
-           name,
-           Row([button, RowWithClasses("flex-item-right", [count, price])]),
-           totalPrice
-       ])
-   ])
+    let inner =
+        Row([pizzaImage, ColumnWithClasses("expand",
+            [
+                name,
+                Row([button, RowWithClasses("flex-item-right", [count, price])]),
+                totalPrice
+            ])
+        ])
 
     inner.classList.add("inner-card", "pizza-card")
     return inner
@@ -305,15 +304,31 @@ function initializeAnimationsTracking() {
     }, 10_000)
 }
 
+function updateStepper(currentIndex: number) {
+    for (let i = 0; i < 4; i++) {
+        let step = document.getElementById(`step-${i}`);
+        if (step) {
+            if (i === currentIndex) {
+                step.classList.add("step-active");
+            } else {
+                step.classList.remove("step-active");
+            }
+        }
+    }
+}
+
 export function nextView(): void {
     let vistas: Array<string> = ['elegir-pizzas', 'menu-direccion', 'menu-pagar', 'menu-trackeo'];
 
     vistas.forEach(idActual => {
-       let vista = document.getElementById(idActual);
-       vista?.classList.add('hidden');
+        let vista = document.getElementById(idActual);
+        vista?.classList.add('hidden');
     });
 
     document.getElementById(vistas[vistaActual])?.classList.remove("hidden")
+
+    updateStepper(vistaActual);
+
     vistaActual++;
 
     switch (vistaActual) {
@@ -328,6 +343,9 @@ export function nextView(): void {
             break;
         }
         case 3: {
+            break;
+        }
+        case 4: {
             impresAddressData()
             createNodesTracking()
             initializeAnimationsTracking()
