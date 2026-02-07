@@ -68,7 +68,7 @@ p, h3 {
     margin: 0;
 }
 .expand {
-   flex: 1;
+    flex: 1;
 }
 
 .layout-bigleft {
@@ -180,4 +180,52 @@ hr {
 
 .tracking-step > p {
     text-align: center;
+}
+.pizza-card {
+     max-height: 125px;
+ }
+
+.pizza-card > img {
+    display: block;
+    max-width: 100px;
+    height: 100px;
+}
+
+/* Stepper Styles - Simplified */
+.step-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid black; /* Estructural (recuadro) */
+    background-color: white;
+    overflow: hidden;
+    margin: 0 10px;
+    /* Solo se mantiene la animación de movimiento (width) */
+    transition: width 0.4s ease;
+}
+
+.step-active {
+    /* El movimiento: se hace grande */
+    width: 160px;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+.step-number {
+    font-weight: bold;
+    font-size: 1.2em;
+    min-width: 20px;
+    text-align: center;
+}
+
+.step-label {
+    display: none;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+.step-active .step-label {
+    display: block;
 }
